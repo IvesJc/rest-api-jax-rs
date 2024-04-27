@@ -1,0 +1,11 @@
+2024-04-26 18:40:34 [grizzly-http-server-0] INFO  org.example.Main - [GET] - 200 - OK
+2024-04-26 18:41:28 [grizzly-http-server-1] INFO  org.example.Main - [GET] - 200 - OK
+2024-04-26 18:42:08 [grizzly-http-server-2] INFO  org.example.Main - 404 - Pokemon NOT FOUND
+2024-04-26 18:44:38 [grizzly-http-server-3] INFO  org.example.Main - [POST] - 201 - Created
+2024-04-26 18:45:00 [grizzly-http-server-4] INFO  org.example.Main - [GET] - 200 - OK
+2024-04-26 18:45:40 [grizzly-http-server-5] INFO  org.example.Main - [PUT] - 200 - OK
+2024-04-26 18:46:11 [grizzly-http-server-6] INFO  org.example.Main - [GET] - 200 - OK
+2024-04-26 18:46:27 [grizzly-http-server-7] INFO  org.example.Main - [GET] - 200 - OK
+2024-04-26 18:46:58 [grizzly-http-server-8] INFO  org.example.Main - [DELETE] - 204 - No content
+2024-04-26 18:47:07 [grizzly-http-server-9] INFO  org.example.Main - 404 - Pokemon NOT FOUND
+2024-04-26 18:47:12 [grizzly-http-server-10] INFO  org.example.Main - [GET] - 200 - OK
