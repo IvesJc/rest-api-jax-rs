@@ -26,13 +26,7 @@ public class PokemonRepository {
         ){
             while (rs.next()){
                 Pokemon pokemon = new Pokemon();
-                pokemon.setId(rs.getInt("ID"));
-                pokemon.setNome(rs.getString("NOME"));
-                pokemon.setTipo(rs.getString("TIPO"));
-                pokemon.setHp(rs.getInt("HP"));
-                pokemon.setHabilidades(rs.getInt("HABILIDADES"));
-                pokemon.setFraqueza(rs.getString("FRAQUEZA"));
-                pokemon.setCor(rs.getString("COR"));
+                mapResultSetToPokemon(rs, pokemon);
                 listPokemon.add(pokemon);
             }
         } catch (SQLException e) {
@@ -53,13 +47,7 @@ public class PokemonRepository {
 
             if (rs.next()){
                 pokemon = new Pokemon();
-                pokemon.setId(rs.getInt("ID"));
-                pokemon.setNome(rs.getString("NOME"));
-                pokemon.setTipo(rs.getString("TIPO"));
-                pokemon.setHp(rs.getInt("HP"));
-                pokemon.setHabilidades(rs.getInt("HABILIDADES"));
-                pokemon.setFraqueza(rs.getString("FRAQUEZA"));
-                pokemon.setCor(rs.getString("COR"));
+                mapResultSetToPokemon(rs, pokemon);
             }
 
         } catch (SQLException e) {
@@ -74,12 +62,7 @@ public class PokemonRepository {
             PreparedStatement psmt = conn.prepareStatement("INSERT INTO pokemons (NOME, TIPO, HP, " +
                     "HABILIDADES, FRAQUEZA, COR) VALUES (?, ?, ?, ?, ?, ?)");
         ){
-            psmt.setString(1, pokemon.getNome());
-            psmt.setString(2, pokemon.getTipo());
-            psmt.setInt(3, pokemon.getHp());
-            psmt.setInt(4, pokemon.getHabilidades());
-            psmt.setString(5, pokemon.getFraqueza());
-            psmt.setString(6, pokemon.getCor());
+            prepareStatementForPokemonInsert(pokemon, psmt);
 
             return psmt.executeUpdate();
         } catch (SQLException e) {
@@ -94,12 +77,7 @@ public class PokemonRepository {
             PreparedStatement psmt = conn.prepareStatement("UPDATE pokemons SET NOME=?, TIPO=?, HP=?, " +
                     "HABILIDADES=?, FRAQUEZA=?, COR=? WHERE ID=?");
         ){
-            psmt.setString(1, pokemon.getNome());
-            psmt.setString(2, pokemon.getTipo());
-            psmt.setInt(3, pokemon.getHp());
-            psmt.setInt(4, pokemon.getHabilidades());
-            psmt.setString(5, pokemon.getFraqueza());
-            psmt.setString(6, pokemon.getCor());
+            prepareStatementForPokemonInsert(pokemon, psmt);
             psmt.setInt(7, pokemon.getId());
             return psmt.executeUpdate();
         } catch (SQLException e) {
@@ -119,6 +97,28 @@ public class PokemonRepository {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    private void mapResultSetToPokemon(ResultSet rs, Pokemon pokemon) {
+        try {
+            pokemon.setId(rs.getInt("ID"));
+            pokemon.setNome(rs.getString("NOME"));
+            pokemon.setTipo(rs.getString("TIPO"));
+            pokemon.setHp(rs.getInt("HP"));
+            pokemon.setHabilidades(rs.getInt("HABILIDADES"));
+            pokemon.setFraqueza(rs.getString("FRAQUEZA"));
+            pokemon.setCor(rs.getString("COR"));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    private void prepareStatementForPokemonInsert(Pokemon pokemon, PreparedStatement psmt) throws SQLException {
+        psmt.setString(1, pokemon.getNome());
+        psmt.setString(2, pokemon.getTipo());
+        psmt.setInt(3, pokemon.getHp());
+        psmt.setInt(4, pokemon.getHabilidades());
+        psmt.setString(5, pokemon.getFraqueza());
+        psmt.setString(6, pokemon.getCor());
     }
 
 }
